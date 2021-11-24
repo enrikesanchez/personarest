@@ -10,7 +10,7 @@ on:
     branches: [ TALLER_TEC2 ]
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
