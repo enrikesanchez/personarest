@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public final class PersonaController {
+public class PersonaController {
     @Autowired
     private PersonaService servicio;
 
@@ -29,7 +29,8 @@ public final class PersonaController {
     }
 
     @GetMapping("/personas/{id}")
-    public ResponseEntity<Persona> obtenerPersona(@PathVariable(value = "id") final long id) throws PersonaNoEncontradaException {
+    public ResponseEntity<Persona> obtenerPersona(@PathVariable(value = "id") final long id)
+            throws PersonaNoEncontradaException {
         var personaEncontrada = servicio.buscarPersona(id);
         return new ResponseEntity<>(personaEncontrada, HttpStatus.OK);
     }
@@ -41,19 +42,22 @@ public final class PersonaController {
     }
 
     @DeleteMapping("/personas/{id}")
-    public ResponseEntity<Persona> borrarPersona(@PathVariable(value = "id") final long id) throws PersonaNoEncontradaException {
+    public ResponseEntity<Persona> borrarPersona(@PathVariable(value = "id") final long id)
+            throws PersonaNoEncontradaException {
         servicio.borrarPersona(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/personas/{id}")
-    public ResponseEntity<Persona> modificarPersona(@PathVariable(value = "id") final long id, @RequestBody final Persona personaModificada) throws PersonaNoEncontradaException {
+    public ResponseEntity<Persona> modificarPersona(@PathVariable(value = "id") final long id,
+            @RequestBody final Persona personaModificada) throws PersonaNoEncontradaException {
         var personaGuardada = servicio.actualizarPersona(id, personaModificada);
         return new ResponseEntity<>(personaGuardada, HttpStatus.OK);
     }
 
     @ExceptionHandler(PersonaNoEncontradaException.class)
-    public ResponseEntity<String> siPersonaNoEncontradaException(final PersonaNoEncontradaException pnee) {
+    public ResponseEntity<String> siPersonaNoEncontradaException(
+            final PersonaNoEncontradaException pnee) {
         return new ResponseEntity<>(pnee.getMessage(), HttpStatus.NO_CONTENT);
     }
 }

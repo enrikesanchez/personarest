@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public final class PersonaService {
+public class PersonaService {
     @Autowired
     private PersonaRepository repositorio;
 
