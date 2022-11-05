@@ -5,9 +5,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ main, java-11-solucion, java-17-solucion  ]
+    branches: [ main, java-11-solucion, java-17-main, java-17-solucion  ]
   pull_request:
-    branches: [ main, java-11-solucion, java-17-solucion  ]
+    branches: [ main, java-11-solucion, java-17-main, java-17-solucion  ]
 
 jobs:
   lint:
@@ -26,6 +26,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_JAVA: true
           VALIDATE_DOCKERFILE: true
+          IGNORE_GENERATED_FILES: true
 
   test:
 
