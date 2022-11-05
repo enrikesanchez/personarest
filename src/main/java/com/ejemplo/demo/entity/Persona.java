@@ -1,14 +1,13 @@
 package com.ejemplo.demo.entity;
 
-import java.util.Calendar;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.Calendar;
 
 @Entity
 @Table(name = "PERSONAS")

@@ -1,7 +1,8 @@
 package com.ejemplo.demo.controller;
 
-import java.util.List;
-
+import com.ejemplo.demo.entity.Persona;
+import com.ejemplo.demo.exception.PersonaNoEncontradaException;
+import com.ejemplo.demo.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ejemplo.demo.entity.Persona;
-import com.ejemplo.demo.exception.PersonaNoEncontradaException;
-import com.ejemplo.demo.service.PersonaService;
+import java.util.List;
 
 @RestController
 public class PersonaController {

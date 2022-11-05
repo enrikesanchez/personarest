@@ -1,17 +1,20 @@
 package com.ejemplo.demo.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Calendar;
-
+import com.ejemplo.demo.entity.Persona;
+import com.ejemplo.demo.exception.PersonaNoEncontradaException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
-import com.ejemplo.demo.entity.Persona;
-import com.ejemplo.demo.exception.PersonaNoEncontradaException;
+import java.util.Calendar;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class PersonaServiceTest {
     @Autowired
     PersonaService servicio;
