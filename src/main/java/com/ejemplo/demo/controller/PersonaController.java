@@ -24,13 +24,13 @@ public class PersonaController {
 
     @PostMapping("/personas")
     public ResponseEntity<Persona> agregarPersona(@RequestBody final Persona personaNueva) {
-        Persona personaGuardada = servicio.agregarPersona(personaNueva);
+        var personaGuardada = servicio.agregarPersona(personaNueva);
         return new ResponseEntity<>(personaGuardada, HttpStatus.CREATED);
     }
 
     @GetMapping("/personas/{id}")
     public ResponseEntity<Persona> obtenerPersona(@PathVariable(value = "id") final long id) throws PersonaNoEncontradaException {
-        Persona personaEncontrada = servicio.buscarPersona(id);
+        var personaEncontrada = servicio.buscarPersona(id);
         return new ResponseEntity<>(personaEncontrada, HttpStatus.OK);
     }
 
@@ -48,7 +48,7 @@ public class PersonaController {
 
     @PutMapping("/personas/{id}")
     public ResponseEntity<Persona> modificarPersona(@PathVariable(value = "id") final long id, @RequestBody final Persona personaModificada) throws PersonaNoEncontradaException {
-        Persona personaGuardada = servicio.actualizarPersona(id, personaModificada);
+        var personaGuardada = servicio.actualizarPersona(id, personaModificada);
         return new ResponseEntity<>(personaGuardada, HttpStatus.OK);
     }
 

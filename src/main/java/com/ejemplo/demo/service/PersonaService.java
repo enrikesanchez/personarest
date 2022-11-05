@@ -15,6 +15,7 @@ public class PersonaService {
     PersonaRepository repositorio;
 
     public Persona buscarPersona(final long personaId) throws PersonaNoEncontradaException {
+        /*
         Optional<Persona> personaOpcional = repositorio.findById(personaId);
 
         if (personaOpcional.isPresent()) {
@@ -22,6 +23,11 @@ public class PersonaService {
         } else {
             throw new PersonaNoEncontradaException();
         }
+        */
+
+        Optional<Persona> personaOpcional = repositorio.findById(personaId);
+        personaOpcional.orElseThrow(PersonaNoEncontradaException::new);
+        return personaOpcional.get();
     }
 
     public List<Persona> listarPersonas() {
@@ -33,16 +39,23 @@ public class PersonaService {
     }
 
     public void borrarPersona(final long personaId) throws PersonaNoEncontradaException {
-        Optional<Persona> personaOpcional = repositorio.findById(personaId);
+        /*
+        final Optional<Persona> personaOpcional = repositorio.findById(personaId);
 
         if (personaOpcional.isPresent()) {
             repositorio.deleteById(personaId);
         } else {
             throw new PersonaNoEncontradaException();
         }
+        */
+
+        repositorio.findById(personaId).orElseThrow(PersonaNoEncontradaException::new);
+        repositorio.deleteById(personaId);
     }
 
-    public Persona actualizarPersona(final long personaId, final Persona personaModificada) throws PersonaNoEncontradaException {
+    public Persona actualizarPersona(final long personaId, final Persona personaModificada)
+            throws PersonaNoEncontradaException {
+        /*
         Optional<Persona> personaOpcional = repositorio.findById(personaId);
 
         if (personaOpcional.isPresent()) {
@@ -50,5 +63,10 @@ public class PersonaService {
         } else {
             throw new PersonaNoEncontradaException();
         }
+        */
+
+        final Persona persona =
+                repositorio.findById(personaId).orElseThrow(PersonaNoEncontradaException::new);
+        return repositorio.save(personaModificada);
     }
 }
