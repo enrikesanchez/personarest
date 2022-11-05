@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class PersonaController {
+public final class PersonaController {
     @Autowired
-    PersonaService servicio;
+    private PersonaService servicio;
 
     @PostMapping("/personas")
     public ResponseEntity<Persona> agregarPersona(@RequestBody final Persona personaNueva) {
@@ -57,3 +57,4 @@ public class PersonaController {
         return new ResponseEntity<>(pnee.getMessage(), HttpStatus.NO_CONTENT);
     }
 }
+

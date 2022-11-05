@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PersonaService {
+public final class PersonaService {
     @Autowired
-    PersonaRepository repositorio;
+    private PersonaRepository repositorio;
 
     public Persona buscarPersona(final long personaId) throws PersonaNoEncontradaException {
         /*
