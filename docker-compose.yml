@@ -2,16 +2,16 @@ version: '3.7'
 
 services:
   db:
-    container_name: mysql
-    image: mysql:latest
+    image: postgres:latest
+    container_name: postgres-db
+    volumes:
+      - pgsql_data:/var/lib/postgresql/data
     ports:
-      - '3306:3306'
+      - '5432:5432'
     environment:
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: persona
-      MYSQL_USER: persona-user
-      MYSQL_PASSWORD: persona-password
-
+      - POSTGRES_USER=persona-user
+      - POSTGRES_PASSWORD=persona-password
+      - POSTGRES_DB=persona
   app:
     container_name: app
     image: persona:latest
@@ -26,3 +26,6 @@ services:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
       - db
+
+volumes:
+  pgsql_data:

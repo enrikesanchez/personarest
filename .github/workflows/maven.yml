@@ -3,17 +3,12 @@
 
 name: Java CI with Maven
 
-on:
-  push:
-    branches: [ main, java-11-solucion, java-17-main, java-17-solucion  ]
-  pull_request:
-    branches: [ main, java-11-solucion, java-17-main, java-17-solucion  ]
+on: [push, pull_request]
 
 jobs:
   lint:
 
     runs-on: ubuntu-latest
-
     steps:
       - uses:  actions/checkout@v2
         with:
@@ -30,8 +25,7 @@ jobs:
 
   test:
 
-    needs: [lint]
-
+    #needs: [lint]
     runs-on: ubuntu-latest
 
     steps:
