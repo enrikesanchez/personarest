@@ -4,10 +4,12 @@ COPY pom.xml .
 RUN mvn dependency:go-offline -B
 COPY src src
 RUN mvn package
+RUN ls
 
 FROM eclipse-temurin:17.0.4.1_1-jre-jammy
 WORKDIR /app
 COPY scripts/wait-for-it.sh .
 RUN chmod +x wait-for-it.sh
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["./wait-for-it.sh", "db:3306", "--strict", "--timeout=300", "--", "java", "-jar", "app.jar"]
+ENTRYPOINT ["./wait-for-it.sh", "db:5432", "--strict", "--timeout=300", "--", "java", "-jar", "app.jar"]
