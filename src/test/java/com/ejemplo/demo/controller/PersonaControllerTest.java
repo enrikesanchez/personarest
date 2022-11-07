@@ -18,6 +18,7 @@ import java.lang.invoke.MethodHandles;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.doThrow;
@@ -78,15 +79,23 @@ class PersonaControllerTest {
     @Test
     void testEndPointBuscarPersona() throws Exception {
         var fechaNacimiento = LocalDate.of(2000,11,8);
-
-        Persona personaGuardada = new Persona(1, "ROVI490617HSPDSS05", "Ismael", "Rodriguez", "Vasquez", fechaNacimiento);
+        var personaGuardada = new Persona(1, "ROVI490617HSPDSS05",
+                "Ismael", "Rodriguez", "Vasquez", fechaNacimiento);
+        var registroEsperado = """
+                        {
+                          "id": 1,
+                          "curp": "ROVI490617HSPDSS05",
+                          "nombres": "Ismael",
+                          "apellidoPaterno": "Rodriguez",
+                          "apellidoMaterno": "Vasquez",
+                          "fechaNacimiento": "08/11/2000"
+                        }
+                        """;
 
         when(servicio.buscarPersona(1)).thenReturn(personaGuardada);
-
-        log.info("{\"id\": 1,\"curp\": \"ROVI490617HSPDSS05\",\"nombres\": \"Ismael\",\"apellidoPaterno\": \"Rodriguez\",\"apellidoMaterno\": \"Vasquez\",\"fechaNacimiento\": \"08/11/2000\"}");
         mvc.perform(get("/personas/1").accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                .andExpect(content().json("{\"id\": 1,\"curp\": \"ROVI490617HSPDSS05\",\"nombres\": \"Ismael\",\"apellidoPaterno\": \"Rodriguez\",\"apellidoMaterno\": \"Vasquez\",\"fechaNacimiento\": \"08/11/2000\"}"));
+                .andExpect(content().json(registroEsperado));
     }
 
     @Test
@@ -101,21 +110,36 @@ class PersonaControllerTest {
     void testEndPointObtenerPersonas() throws Exception {
         var fechaNacimiento = LocalDate.of(2000,11,8);
 
-        Persona personaGuardada1 = new Persona(1, "ROVI490617HSPDSS05", "Ismael", "Rodriguez", "Vasquez", fechaNacimiento);
-        Persona personaGuardada2 = new Persona(2, "MAHJ280603MSPRRV09", "Maria Jimena", "Martinez", "Hernandez", fechaNacimiento);
+        var personaGuardada1 = new Persona(1, "ROVI490617HSPDSS05",
+                "Ismael", "Rodriguez", "Vasquez", fechaNacimiento);
+        var personaGuardada2 = new Persona(2, "MAHJ280603MSPRRV09",
+                "Maria Jimena", "Martinez", "Hernandez", fechaNacimiento);
 
-        List<Persona> listaPersonas = new ArrayList<>();
-        listaPersonas.add(personaGuardada1);
-        listaPersonas.add(personaGuardada2);
-
+        List<Persona> listaPersonas = Arrays.asList(personaGuardada1, personaGuardada2);
         when(servicio.listarPersonas()).thenReturn(listaPersonas);
 
+        var resultado = """
+                [
+                  {
+                    "id": 1,
+                    "curp": "ROVI490617HSPDSS05",
+                    "nombres": "Ismael",
+                    "apellidoPaterno": "Rodriguez",
+                    "apellidoMaterno": "Vasquez",
+                    "fechaNacimiento": "08/11/2000"
+                  },
+                  {
+                    "id": 2,
+                    "curp": "MAHJ280603MSPRRV09",
+                    "nombres": "Maria Jimena",
+                    "apellidoPaterno": "Martinez",
+                    "apellidoMaterno": "Hernandez",
+                    "fechaNacimiento": "08/11/2000"
+                  }
+                ]""";
         mvc.perform(get("/personas").accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                .andExpect(content().json("["
-                        + "{\"id\": 1,\"curp\": \"ROVI490617HSPDSS05\",\"nombres\": \"Ismael\",\"apellidoPaterno\": \"Rodriguez\",\"apellidoMaterno\": \"Vasquez\",\"fechaNacimiento\": \"08/11/2000\"},"
-                        + "{\"id\": 2,\"curp\": \"MAHJ280603MSPRRV09\",\"nombres\": \"Maria Jimena\",\"apellidoPaterno\": \"Martinez\",\"apellidoMaterno\": \"Hernandez\",\"fechaNacimiento\": \"08/11/2000\"}"
-                        + "]"));
+                .andExpect(content().json(resultado));
     }
 
     @Test
@@ -136,23 +160,35 @@ class PersonaControllerTest {
     void testEndPointModificarPersona() throws Exception {
         var fechaNacimiento = LocalDate.of(2000,11,8);
 
-        Persona personaParametro = new Persona(1, "ROVI490617HSPDSS05", "Ismael", "Rodriguez", "Vazquez", fechaNacimiento);
+        var personaParametro = new Persona(1, "ROVI490617HSPDSS05",
+                "Ismael", "Rodriguez", "Vazquez", fechaNacimiento);
+        var resultado = """
+                {
+                  "id": 1,
+                  "curp": "ROVI490617HSPDSS05",
+                  "nombres": "Ismael",
+                  "apellidoPaterno": "Rodriguez",
+                  "apellidoMaterno": "Vazquez",
+                  "fechaNacimiento": "08/11/2000"
+                }""";
 
         when(servicio.actualizarPersona(1, personaParametro)).thenReturn(personaParametro);
-
-        mvc.perform(put("/personas/1").accept(MediaType.APPLICATION_JSON)
+        mvc.perform(put("/personas/1")
+                        .accept(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(personaParametro).getBytes(StandardCharsets.UTF_8))
                         .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                .andExpect(content().json("{\"id\": 1,\"curp\": \"ROVI490617HSPDSS05\",\"nombres\": \"Ismael\",\"apellidoPaterno\": \"Rodriguez\",\"apellidoMaterno\": \"Vazquez\",\"fechaNacimiento\": \"08/11/2000\"}"));
+                .andExpect(content().json(resultado));
     }
 
     @Test
     void testEndPointModificarPersonaInexistente() throws Exception {
         var fechaNacimiento = LocalDate.of(2000,11,8);
 
-        Persona personaParametro = new Persona(9999, "ROVI490617HSPDSS05", "Ismael", "Rodriguez", "Vazquez", fechaNacimiento);
+        var personaParametro = new Persona(9999, "ROVI490617HSPDSS05",
+                "Ismael", "Rodriguez", "Vazquez", fechaNacimiento);
 
-        when(servicio.actualizarPersona(9999, personaParametro)).thenThrow(PersonaNoEncontradaException.class);
+        when(servicio.actualizarPersona(9999, personaParametro))
+                .thenThrow(PersonaNoEncontradaException.class);
 
         mvc.perform(put("/personas/9999").accept(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(personaParametro).getBytes(StandardCharsets.UTF_8))

@@ -23,7 +23,7 @@ class PersonaServiceTest {
     @Test
     void testCreacionPersona() {
         // GIVEN
-        Persona personaNueva = new Persona();
+        var personaNueva = new Persona();
         personaNueva.setCurp("ROVI490617HSPDSS05");
         personaNueva.setNombres("Ismael");
         personaNueva.setApellidoPaterno("Rodriguez");
@@ -40,7 +40,7 @@ class PersonaServiceTest {
     @Test
     void testBuscarPersonaExistente() throws PersonaNoEncontradaException {
         // GIVEN
-        Persona personaNueva = new Persona();
+        var personaNueva = new Persona();
         personaNueva.setCurp("MAHJ280603MSPRRV09");
         personaNueva.setNombres("Maria Jimena");
         personaNueva.setApellidoPaterno("Martinez");
@@ -74,7 +74,7 @@ class PersonaServiceTest {
     @Test
     void testBorrarPersonaExistente() throws PersonaNoEncontradaException {
         // GIVEN
-        Persona personaNueva = new Persona();
+        var personaNueva = new Persona();
         personaNueva.setCurp("PERC561125MSPRMT03");
         personaNueva.setNombres("Catalina");
         personaNueva.setApellidoPaterno("Peralta");
@@ -114,7 +114,7 @@ class PersonaServiceTest {
     @Test
     void testActualizarPersonaExistente() throws PersonaNoEncontradaException {
         // GIVEN
-        Persona personaNueva = new Persona();
+        var personaNueva = new Persona();
         personaNueva.setCurp("TOHA530902HSPRRN07");
         personaNueva.setNombres("Antonio");
         personaNueva.setApellidoPaterno("Torres");
@@ -135,7 +135,7 @@ class PersonaServiceTest {
     @Test
     void testActualizarPersonaNoExistente() {
         // GIVEN
-        Persona personaNoExistente = new Persona();
+        var personaNoExistente = new Persona();
         personaNoExistente.setId(Long.MAX_VALUE);
         personaNoExistente.setCurp("VEGA780615HDFLML08");
         personaNoExistente.setNombres("Alvaro");

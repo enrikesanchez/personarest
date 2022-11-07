@@ -20,17 +20,18 @@ import java.util.List;
 @RestController
 public class PersonaController {
     @Autowired
-    PersonaService servicio;
+    private PersonaService servicio;
 
     @PostMapping("/personas")
     public ResponseEntity<Persona> agregarPersona(@RequestBody final Persona personaNueva) {
-        Persona personaGuardada = servicio.agregarPersona(personaNueva);
+        var personaGuardada = servicio.agregarPersona(personaNueva);
         return new ResponseEntity<>(personaGuardada, HttpStatus.CREATED);
     }
 
     @GetMapping("/personas/{id}")
-    public ResponseEntity<Persona> obtenerPersona(@PathVariable(value = "id") final long id) throws PersonaNoEncontradaException {
-        Persona personaEncontrada = servicio.buscarPersona(id);
+    public ResponseEntity<Persona> obtenerPersona(@PathVariable(value = "id") final long id)
+            throws PersonaNoEncontradaException {
+        var personaEncontrada = servicio.buscarPersona(id);
         return new ResponseEntity<>(personaEncontrada, HttpStatus.OK);
     }
 
@@ -41,19 +42,23 @@ public class PersonaController {
     }
 
     @DeleteMapping("/personas/{id}")
-    public ResponseEntity<Persona> borrarPersona(@PathVariable(value = "id") final long id) throws PersonaNoEncontradaException {
+    public ResponseEntity<Persona> borrarPersona(@PathVariable(value = "id") final long id)
+            throws PersonaNoEncontradaException {
         servicio.borrarPersona(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/personas/{id}")
-    public ResponseEntity<Persona> modificarPersona(@PathVariable(value = "id") final long id, @RequestBody final Persona personaModificada) throws PersonaNoEncontradaException {
-        Persona personaGuardada = servicio.actualizarPersona(id, personaModificada);
+    public ResponseEntity<Persona> modificarPersona(@PathVariable(value = "id") final long id,
+            @RequestBody final Persona personaModificada) throws PersonaNoEncontradaException {
+        var personaGuardada = servicio.actualizarPersona(id, personaModificada);
         return new ResponseEntity<>(personaGuardada, HttpStatus.OK);
     }
 
     @ExceptionHandler(PersonaNoEncontradaException.class)
-    public ResponseEntity<String> siPersonaNoEncontradaException(final PersonaNoEncontradaException pnee) {
+    public ResponseEntity<String> siPersonaNoEncontradaException(
+            final PersonaNoEncontradaException pnee) {
         return new ResponseEntity<>(pnee.getMessage(), HttpStatus.NO_CONTENT);
     }
 }
+
