@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  db:
+    container_name: mysql
+    image: mysql:latest
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: persona
+      MYSQL_USER: persona-user
+      MYSQL_PASSWORD: persona-password
+
+  app:
+    container_name: app
+    image: persona:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '8080:8080'
+    expose:
+      - 8080
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      - db
