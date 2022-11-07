@@ -110,7 +110,7 @@
             <property name="scope" value="public"/>
         </module>
         <module name="JavadocStyle"/>
-        <module name="MissingJavadocMethod"/>
+        <!-- <module name="MissingJavadocMethod"/>  -->
         <!-- Enables @SuppressWarnings Support                -->
         <module name="SuppressWarningsHolder"/>
 
@@ -185,7 +185,7 @@
 
         <!-- Checks for class design                         -->
         <!-- See https://checkstyle.org/config_design.html -->
-        <module name="DesignForExtension"/>
+        <!-- <module name="DesignForExtension"/> -->
         <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
