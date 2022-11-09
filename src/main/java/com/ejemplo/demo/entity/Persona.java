@@ -30,7 +30,7 @@ public class Persona {
     private String apellidoMaterno;
 
     @Column(name = "fecha_nacimiento")
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate fechaNacimiento;
 
     public Persona() {

@@ -12,8 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -32,7 +30,7 @@ public class PersonaServiceTest {
         personaNueva.setNombres("Ismael");
         personaNueva.setApellidoPaterno("Rodriguez");
         personaNueva.setApellidoMaterno("Vasquez");
-        personaNueva.setFechaNacimiento(LocalDate.of(2019,1,10));
+        personaNueva.setFechaNacimiento(LocalDate.of(2019 ,1 , 10));
 
         // WHEN
         Persona personaGuardada = servicio.agregarPersona(personaNueva);
@@ -49,7 +47,7 @@ public class PersonaServiceTest {
         personaNueva.setNombres("Maria Jimena");
         personaNueva.setApellidoPaterno("Martinez");
         personaNueva.setApellidoMaterno("Hernandez");
-        personaNueva.setFechaNacimiento(LocalDate.of(2019,1,10));
+        personaNueva.setFechaNacimiento(LocalDate.of(2019, 1, 10));
 
         var personaGuardada = servicio.agregarPersona(personaNueva);
 
