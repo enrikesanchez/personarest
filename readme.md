@@ -17,6 +17,8 @@ SET PATH=%PATH%;%JAVA_HOME%\bin;%MVN_HOME%\bin
 mvn clean package
 ```
 
+Se incluye documentación de Windows
+
 
 ## Inicializar la aplicación con Docker
 
