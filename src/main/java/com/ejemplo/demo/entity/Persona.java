@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "PERSONAS")
 public class Persona {
+
     @Id
     @GeneratedValue
     @Column(name="persona_id")
@@ -95,8 +96,11 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona [id=" + id + ", curp=" + curp + ", nombres=" + nombres + ", apellidoPaterno=" + apellidoPaterno
-                + ", apellidoMaterno=" + apellidoMaterno + ", fechaNacimiento=" + fechaNacimiento + "]";
+        return "Persona [id=" + id + ", curp=" + curp + ", " +
+                "nombres=" + nombres +
+                ", apellidoPaterno=" + apellidoPaterno +
+                ", apellidoMaterno=" + apellidoMaterno +
+                ", fechaNacimiento=" + fechaNacimiento + "]";
     }
 
     @Override
