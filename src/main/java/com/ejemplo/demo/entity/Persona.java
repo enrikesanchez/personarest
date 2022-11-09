@@ -14,26 +14,28 @@ public class Persona {
 
     @Id
     @GeneratedValue
-    @Column(name="persona_id")
+    @Column(name = "persona_id")
     private long id;
 
-    @Column(name="curp")
+    @Column(name = "curp")
     private String curp;
 
-    @Column(name="nombres")
+    @Column(name = "nombres")
     private String nombres;
 
-    @Column(name="apellido_paterno")
+    @Column(name = "apellido_paterno")
     private String apellidoPaterno;
 
-    @Column(name="apellido_materno")
+    @Column(name = "apellido_materno")
     private String apellidoMaterno;
 
-    @Column(name="fecha_nacimiento")
+    @Column(name = "fecha_nacimiento")
     @JsonFormat(pattern="dd/MM/yyyy")
     private LocalDate fechaNacimiento;
 
-    public Persona() {}
+    public Persona() {
+
+    }
 
     public Persona(final long id, final String curp, final String nombres,
             final String apellidoPaterno, final String apellidoMaterno,
@@ -50,7 +52,7 @@ public class Persona {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         this.id = id;
     }
 
@@ -58,7 +60,7 @@ public class Persona {
         return curp;
     }
 
-    public void setCurp(String curp) {
+    public void setCurp(final String curp) {
         this.curp = curp;
     }
 
@@ -66,7 +68,7 @@ public class Persona {
         return nombres;
     }
 
-    public void setNombres(String nombres) {
+    public void setNombres(final String nombres) {
         this.nombres = nombres;
     }
 
@@ -74,7 +76,7 @@ public class Persona {
         return apellidoPaterno;
     }
 
-    public void setApellidoPaterno(String apellidoPaterno) {
+    public void setApellidoPaterno(final String apellidoPaterno) {
         this.apellidoPaterno = apellidoPaterno;
     }
 
@@ -82,7 +84,7 @@ public class Persona {
         return apellidoMaterno;
     }
 
-    public void setApellidoMaterno(String apellidoMaterno) {
+    public void setApellidoMaterno(final String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
     }
 
@@ -90,14 +92,15 @@ public class Persona {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+    public void setFechaNacimiento(final LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
     @Override
     public String toString() {
-        return "Persona [id=" + id + ", curp=" + curp + ", " +
-                "nombres=" + nombres +
+        return "Persona [id=" + id +
+                ", curp=" + curp +
+                ", nombres=" + nombres +
                 ", apellidoPaterno=" + apellidoPaterno +
                 ", apellidoMaterno=" + apellidoMaterno +
                 ", fechaNacimiento=" + fechaNacimiento + "]";
