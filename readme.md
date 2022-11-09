@@ -17,6 +17,8 @@ SET PATH=%PATH%;%JAVA_HOME%\bin;%MVN_HOME%\bin
 mvn clean package
 ```
 
+Se incluye documentación de Windows para utilizar Java 17 en el readme
+
 
 ## Inicializar la aplicación con Docker
 
